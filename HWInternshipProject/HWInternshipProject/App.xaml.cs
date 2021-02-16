@@ -1,10 +1,11 @@
 using HWInternshipProject.ViewModels;
-using HWInternshipProject.Views;
+//using HWInternshipProject.Views;
 using Prism;
 using Prism.Ioc;
 using Xamarin.Essentials.Implementation;
 using Xamarin.Essentials.Interfaces;
 using Xamarin.Forms;
+using System.Resources;
 
 namespace HWInternshipProject
 {
@@ -13,13 +14,14 @@ namespace HWInternshipProject
         public App(IPlatformInitializer initializer)
             : base(initializer)
         {
+
         }
 
         protected override async void OnInitialized()
         {
             InitializeComponent();
 
-            await NavigationService.NavigateAsync("NavigationPage/MainPage");
+            //await NavigationService.NavigateAsync("NavigationPage/MainPage");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
@@ -27,7 +29,6 @@ namespace HWInternshipProject
             containerRegistry.RegisterSingleton<IAppInfo, AppInfoImplementation>();
 
             containerRegistry.RegisterForNavigation<NavigationPage>();
-            containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
         }
     }
 }
