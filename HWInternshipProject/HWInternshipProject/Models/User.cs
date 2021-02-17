@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.ComponentModel.DataAnnotations;
+using System.Threading.Tasks;
 
 namespace HWInternshipProject.Models
 {
@@ -12,15 +13,35 @@ namespace HWInternshipProject.Models
         public string Login { get; set; }
         public string HashPassword { get; set; }
         public List<Profile> Profiles { get; set; } = new List<Profile>();
+        public static User Current { get; set; }
 
-        public static User SignIn(string login, string password)
+        public static async Task<User> SignInAsync(string login, string password)
+        {
+            return await Task.Run(() =>
+            {
+                using (var context = new Context())
+                {
+                    var hashPasword = (from user in context.users where user.Login == login select user.HashPassword).FirstOrDefault();
+
+                    if (RFCHasher.Verify(password, hashPasword ?? ""))
+                    {
+                        var user = (from usr in context.users.Include(u => u.Profiles) where usr.Login == login select usr).First();
+                        User.Current = user;
+                        return user;
+
+                    }
+
+                    return null;
+                }
+            }
+            );
+        }
+
+        public static bool IsLoginUnique(string login)
         {
             using (var context = new Context())
             {
-                if (!context.users.Any(u => u.Login == login && RFCHasher.Verify(password, u.HashPassword)))
-                    return null;
-
-                return (from user in context.users.Include(u => u.Profiles) where user.Login == login select user).First();
+                return !context.users.Any(u => u.Login == login);
             }
         }
 

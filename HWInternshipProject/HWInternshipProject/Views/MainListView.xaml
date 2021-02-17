@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="HWInternshipProject.Views.MainListView"
+             xmlns:resources="clr-namespace:HWInternshipProject.Resources"
+             Title="{x:Static resources:TextResources.Title_MainList}">
+ 
+    <AbsoluteLayout>
+
+        <ScrollView AbsoluteLayout.LayoutBounds="0,0,1,1"
+            AbsoluteLayout.LayoutFlags="SizeProportional">
+            <StackLayout>
+                <ListView ItemsSource="{Binding Profiles}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <EntryCell Text="{Binding Name}"/>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+        </ScrollView>
+        <Button Text="Click" 
+                CornerRadius="10" 
+                AbsoluteLayout.LayoutFlags="PositionProportional"
+                AbsoluteLayout.LayoutBounds="0.95,0.95,80,80" 
+                HeightRequest="80"
+                WidthRequest="80" 
+                Command="{Binding AddProfileCommand}"/>
+    </AbsoluteLayout>
+</ContentPage>

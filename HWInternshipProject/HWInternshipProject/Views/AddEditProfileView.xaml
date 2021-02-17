@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="HWInternshipProject.Views.AddEditProfileView"
+             xmlns:resources="clr-namespace:HWInternshipProject.Resources"
+             Title="{x:Static resources:TextResources.Title_AddEditProfile}">
+
+    <StackLayout>
+        <Entry Placeholder="{x:Static resources:TextResources.NickName}" 
+               Text="{Binding NickName}"/>
+        <Entry Placeholder="{x:Static resources:TextResources.Name}" 
+               Text="{Binding Name}"/>
+        <Editor Placeholder="{x:Static resources:TextResources.Description}"
+                Text="{Binding Description}"/>
+        <Button Text="{x:Static resources:TextResources.Save}"
+                Command="{Binding AddSaveCommand}"/>
+    </StackLayout>
+</ContentPage>

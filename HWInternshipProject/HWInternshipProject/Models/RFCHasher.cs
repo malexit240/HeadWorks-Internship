@@ -26,15 +26,22 @@ namespace HWInternshipProject.Models
 
         public static bool Verify(string entry_password, string saved_hash)
         {
-            byte[] hashBytes = Convert.FromBase64String(saved_hash);
-            byte[] salt = new byte[SaltSize];
-            Array.Copy(hashBytes, 0, salt, 0, SaltSize);
-            var pbkdf2 = new Rfc2898DeriveBytes(entry_password, salt, HashIter);
-            byte[] hash = pbkdf2.GetBytes(HashSize);
+            try
+            {
+                byte[] hashBytes = Convert.FromBase64String(saved_hash);
+                byte[] salt = new byte[SaltSize];
+                Array.Copy(hashBytes, 0, salt, 0, SaltSize);
+                var pbkdf2 = new Rfc2898DeriveBytes(entry_password, salt, HashIter);
+                byte[] hash = pbkdf2.GetBytes(HashSize);
 
-            for (int i = 0; i < HashSize; i++)
-                if (hashBytes[i + SaltSize] != hash[i])
-                    return false;
+                for (int i = 0; i < HashSize; i++)
+                    if (hashBytes[i + SaltSize] != hash[i])
+                        return false;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
             return true;
         }
     }

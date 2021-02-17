@@ -26,6 +26,18 @@ namespace HWITests
             Assert.IsTrue(RFCHasher.Verify("admin", user.HashPassword));
             user = User.Create("Vasya", "admin");
             Assert.IsNull(user);
+
+            user = User.Create("Petya", "admin");
+        }
+        [TestMethod]
+        public async void TestSignIn()
+        {
+            var user = User.Create("Vasya", "admin");
+            user = await User.SignInAsync("Vasya", "admin");
+            Assert.IsNotNull(user);
+
+            user = await User.SignInAsync("Petya", "admin");
+            Assert.IsNull(user);
         }
     }
 }
