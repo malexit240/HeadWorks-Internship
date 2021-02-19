@@ -117,11 +117,26 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Choose_language" xml:space="preserve">
+    <value>Выберите язык</value>
+  </data>
   <data name="ConfirmPassword" xml:space="preserve">
     <value>Подтвердите пароль</value>
   </data>
+  <data name="CreationTime" xml:space="preserve">
+    <value>Время создания</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Удалить</value>
+  </data>
   <data name="Description" xml:space="preserve">
     <value>Описание</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Редактировать</value>
+  </data>
+  <data name="English" xml:space="preserve">
+    <value>Английский</value>
   </data>
   <data name="Login" xml:space="preserve">
     <value>Логин</value>
@@ -132,8 +147,17 @@
   <data name="NickName" xml:space="preserve">
     <value>Прозвище</value>
   </data>
+  <data name="NoAddedProfiles" xml:space="preserve">
+    <value>Профили не добавлены</value>
+  </data>
   <data name="Password" xml:space="preserve">
     <value>Пароль</value>
+  </data>
+  <data name="ProfilesListOrderBy" xml:space="preserve">
+    <value>Сортировать список профилей по</value>
+  </data>
+  <data name="Russian" xml:space="preserve">
+    <value>Русский</value>
   </data>
   <data name="Save" xml:space="preserve">
     <value>Сохранить</value>
@@ -144,11 +168,17 @@
   <data name="SignUp" xml:space="preserve">
     <value>Зарегистрироваться </value>
   </data>
+  <data name="Theme" xml:space="preserve">
+    <value>Тема</value>
+  </data>
   <data name="Title_AddEditProfile" xml:space="preserve">
     <value>Редактирование профиля</value>
   </data>
   <data name="Title_MainList" xml:space="preserve">
     <value>Главный список</value>
+  </data>
+  <data name="Title_SettingsView" xml:space="preserve">
+    <value>Настройки</value>
   </data>
   <data name="Title_UserSignIn" xml:space="preserve">
     <value>Вход пользователя</value>

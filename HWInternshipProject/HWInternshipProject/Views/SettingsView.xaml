@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="HWInternshipProject.Views.SettingsView"
+             xmlns:resources="clr-namespace:HWInternshipProject.Resources"
+             BackgroundColor="{DynamicResource PageBackgroundColor}"
+             Title="{x:Static resources:TextResources.Title_SettingsView}">
+
+    <StackLayout>
+        <Label Text="{x:Static resources:TextResources.ProfilesListOrderBy}"/>
+        <RadioButton Text ="{x:Static resources:TextResources.NickName}" 
+                     IsChecked="{Binding OrderBy_NickName}"
+                     GroupName="OrderBy"/>
+        <RadioButton Text="{x:Static resources:TextResources.Name}" 
+                     IsChecked="{Binding OrderBy_Name}"
+                     GroupName="OrderBy"/>
+        <RadioButton Text="{x:Static resources:TextResources.CreationTime}"
+                     IsChecked="{Binding OrderBy_CreationTime}"
+                     GroupName="OrderBy"/>
+
+        <Label Text="{x:Static resources:TextResources.Theme}"/>
+        <Switch IsToggled="{Binding IsLightTheme}"/>
+
+
+        <Label Text="{x:Static resources:TextResources.Choose_language}"/>
+        <RadioButton Text="{x:Static resources:TextResources.English}" 
+                     IsChecked="{Binding IsEn_US}"
+                     GroupName="LanguageChoose"/>
+        <RadioButton Text="{x:Static resources:TextResources.Russian}"
+                     IsChecked="{Binding IsRu_RU}"
+                     GroupName="LanguageChoose"/>
+
+    </StackLayout>
+</ContentPage>

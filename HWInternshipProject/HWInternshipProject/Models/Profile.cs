@@ -8,34 +8,43 @@ namespace HWInternshipProject.Models
     public class Profile
     {
         public int ProfileId { get; set; }
-        public string ImageDestination { get; set; }
+        public string ImageDestination { get; set; } = "";
         public string NickName { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+        public DateTime CreationTime { get; set; }
         public User User { get; set; }
         public Guid UserId { get; set; }
 
-        public static Profile Create(Guid user_id, string nick, string name, string description = "", string imageDestination = "")
+        public static event EventHandler Actualize;
+
+
+        public static Profile Create(Profile profile)
         {
             using (var context = new Context())
             {
-
-                if (context.users.Find(user_id) == null)
+                if (context.users.Find(profile.UserId) == null)
                     throw new NullReferenceException();
 
-                var profile = new Profile()
-                {
-                    UserId = user_id,
-                    ImageDestination = imageDestination,
-                    NickName = nick,
-                    Name = name,
-                    Description = description
-                };
+                profile.CreationTime = DateTime.Now;
 
                 context.profiles.Add(profile);
                 context.SaveChanges();
                 return profile;
             }
+        }
+
+        public static Profile Create(Guid user_id, string nick, string name, string description = "", string imageDestination = "")
+        {
+
+            return Create(new Profile()
+            {
+                UserId = user_id,
+                ImageDestination = imageDestination,
+                NickName = nick,
+                Name = name,
+                Description = description,
+            });
         }
 
         public static void Update(Profile profile)
@@ -44,6 +53,7 @@ namespace HWInternshipProject.Models
             {
                 context.profiles.Update(profile);
                 context.SaveChanges();
+                Actualize?.Invoke(profile, new EventArgs());
             }
         }
 
@@ -63,6 +73,7 @@ namespace HWInternshipProject.Models
             {
                 context.profiles.Remove(profile);
                 context.SaveChanges();
+                Actualize?.Invoke(profile, new EventArgs());
             }
         }
 

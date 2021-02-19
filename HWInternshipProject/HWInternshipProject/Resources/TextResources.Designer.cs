@@ -61,6 +61,15 @@ namespace HWInternshipProject.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Choose language.
+        /// </summary>
+        internal static string Choose_language {
+            get {
+                return ResourceManager.GetString("Choose_language", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Confirm Password.
         /// </summary>
         internal static string ConfirmPassword {
@@ -70,11 +79,47 @@ namespace HWInternshipProject.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Creation time.
+        /// </summary>
+        internal static string CreationTime {
+            get {
+                return ResourceManager.GetString("CreationTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Delete.
+        /// </summary>
+        internal static string Delete {
+            get {
+                return ResourceManager.GetString("Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Description.
         /// </summary>
         internal static string Description {
             get {
                 return ResourceManager.GetString("Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Edit.
+        /// </summary>
+        internal static string Edit {
+            get {
+                return ResourceManager.GetString("Edit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на English.
+        /// </summary>
+        internal static string English {
+            get {
+                return ResourceManager.GetString("English", resourceCulture);
             }
         }
         
@@ -106,11 +151,38 @@ namespace HWInternshipProject.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на No profiles added.
+        /// </summary>
+        internal static string NoAddedProfiles {
+            get {
+                return ResourceManager.GetString("NoAddedProfiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Password.
         /// </summary>
         internal static string Password {
             get {
                 return ResourceManager.GetString("Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Order a list of profiles by.
+        /// </summary>
+        internal static string ProfilesListOrderBy {
+            get {
+                return ResourceManager.GetString("ProfilesListOrderBy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Russian.
+        /// </summary>
+        internal static string Russian {
+            get {
+                return ResourceManager.GetString("Russian", resourceCulture);
             }
         }
         
@@ -142,6 +214,15 @@ namespace HWInternshipProject.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Theme.
+        /// </summary>
+        internal static string Theme {
+            get {
+                return ResourceManager.GetString("Theme", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на AddEditProfile.
         /// </summary>
         internal static string Title_AddEditProfile {
@@ -156,6 +237,15 @@ namespace HWInternshipProject.Resources {
         internal static string Title_MainList {
             get {
                 return ResourceManager.GetString("Title_MainList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Settings.
+        /// </summary>
+        internal static string Title_SettingsView {
+            get {
+                return ResourceManager.GetString("Title_SettingsView", resourceCulture);
             }
         }
         

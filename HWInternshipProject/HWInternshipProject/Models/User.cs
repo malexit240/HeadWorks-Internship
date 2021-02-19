@@ -13,7 +13,18 @@ namespace HWInternshipProject.Models
         public string Login { get; set; }
         public string HashPassword { get; set; }
         public List<Profile> Profiles { get; set; } = new List<Profile>();
-        public static User Current { get; set; }
+        private static Guid _currentUserId = Guid.Empty;
+        public static User Current
+        {
+            get
+            {
+                using (var context = new Context())
+                {
+                    return _currentUserId == Guid.Empty ? null : (from user in context.users.Include(u => u.Profiles) where user.UserId == _currentUserId select user).First();
+                }
+
+            }
+        }
 
         public static async Task<User> SignInAsync(string login, string password)
         {
@@ -26,15 +37,20 @@ namespace HWInternshipProject.Models
                     if (RFCHasher.Verify(password, hashPasword ?? ""))
                     {
                         var user = (from usr in context.users.Include(u => u.Profiles) where usr.Login == login select usr).First();
-                        User.Current = user;
-                        return user;
 
+                        User._currentUserId = user.UserId;
+                        return user;
                     }
 
                     return null;
                 }
             }
             );
+        }
+
+        public static void LogOut()
+        {
+            User._currentUserId = Guid.Empty;
         }
 
         public static bool IsLoginUnique(string login)

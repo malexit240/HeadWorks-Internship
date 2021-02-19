@@ -8,6 +8,11 @@
              Title="{x:Static resources:TextResources.Title_AddEditProfile}">
 
     <StackLayout>
+        <Image Source="{Binding ImageDestination}" >
+            <Image.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding SelectImageCommand}"/>
+            </Image.GestureRecognizers>
+        </Image>
         <Entry Placeholder="{x:Static resources:TextResources.NickName}" 
                Text="{Binding NickName}"/>
         <Entry Placeholder="{x:Static resources:TextResources.Name}" 
