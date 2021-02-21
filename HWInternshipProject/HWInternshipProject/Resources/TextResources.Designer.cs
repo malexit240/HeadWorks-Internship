@@ -61,11 +61,29 @@ namespace HWInternshipProject.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Cancel.
+        /// </summary>
+        internal static string Cancel {
+            get {
+                return ResourceManager.GetString("Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Choose language.
         /// </summary>
         internal static string Choose_language {
             get {
                 return ResourceManager.GetString("Choose_language", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Choose action.
+        /// </summary>
+        internal static string ChooseAction {
+            get {
+                return ResourceManager.GetString("ChooseAction", resourceCulture);
             }
         }
         
@@ -124,11 +142,56 @@ namespace HWInternshipProject.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Error.
+        /// </summary>
+        internal static string Error {
+            get {
+                return ResourceManager.GetString("Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Fields &apos;Name&apos; and &apos;Nikename&apos; must be filled.
+        /// </summary>
+        internal static string FiledsNandNNmustbefilled {
+            get {
+                return ResourceManager.GetString("FiledsNandNNmustbefilled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Login.
         /// </summary>
         internal static string Login {
             get {
                 return ResourceManager.GetString("Login", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Login length must be greater than 4 and lower than 16.
+        /// </summary>
+        internal static string LoginInvalidLengthError {
+            get {
+                return ResourceManager.GetString("LoginInvalidLengthError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на This login already exist.
+        /// </summary>
+        internal static string LoginNotUniqueError {
+            get {
+                return ResourceManager.GetString("LoginNotUniqueError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Login must starts with letter.
+        /// </summary>
+        internal static string LoginStartWithDigitError {
+            get {
+                return ResourceManager.GetString("LoginStartWithDigitError", resourceCulture);
             }
         }
         
@@ -151,6 +214,15 @@ namespace HWInternshipProject.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на No.
+        /// </summary>
+        internal static string No {
+            get {
+                return ResourceManager.GetString("No", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на No profiles added.
         /// </summary>
         internal static string NoAddedProfiles {
@@ -160,11 +232,56 @@ namespace HWInternshipProject.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на OK.
+        /// </summary>
+        internal static string Ok {
+            get {
+                return ResourceManager.GetString("Ok", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Password.
         /// </summary>
         internal static string Password {
             get {
                 return ResourceManager.GetString("Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Password and Confirm password do not match.
+        /// </summary>
+        internal static string PasswordConfirmDontMatch {
+            get {
+                return ResourceManager.GetString("PasswordConfirmDontMatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Password length must be greater than 8 and lower than 16.
+        /// </summary>
+        internal static string PasswordLengthInvalid {
+            get {
+                return ResourceManager.GetString("PasswordLengthInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Password must contains minimum one digit and letter in UPPER case.
+        /// </summary>
+        internal static string PaswordContentInvalid {
+            get {
+                return ResourceManager.GetString("PaswordContentInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Pick at Gallery.
+        /// </summary>
+        internal static string PickAtGallery {
+            get {
+                return ResourceManager.GetString("PickAtGallery", resourceCulture);
             }
         }
         
@@ -210,6 +327,15 @@ namespace HWInternshipProject.Resources {
         internal static string SignUp {
             get {
                 return ResourceManager.GetString("SignUp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Take a photo with camera.
+        /// </summary>
+        internal static string TakeAPhotoWithCamera {
+            get {
+                return ResourceManager.GetString("TakeAPhotoWithCamera", resourceCulture);
             }
         }
         
@@ -264,6 +390,33 @@ namespace HWInternshipProject.Resources {
         internal static string Title_UserSignUp {
             get {
                 return ResourceManager.GetString("Title_UserSignUp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на User not found.
+        /// </summary>
+        internal static string UserNotFound {
+            get {
+                return ResourceManager.GetString("UserNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Would you want to delete ?.
+        /// </summary>
+        internal static string WouldYouWantToDelete {
+            get {
+                return ResourceManager.GetString("WouldYouWantToDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Yes.
+        /// </summary>
+        internal static string Yes {
+            get {
+                return ResourceManager.GetString("Yes", resourceCulture);
             }
         }
     }

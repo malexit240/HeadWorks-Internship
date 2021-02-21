@@ -9,6 +9,10 @@ using HWInternshipProject.Models;
 using HWInternshipProject.Services.Validators;
 using HWInternshipProject.Services.Models;
 
+using HWInternshipProject.Resources;
+
+using Acr.UserDialogs;
+
 namespace HWInternshipProject.ViewModels
 {
     public class SignUpViewViewModel : ViewModelBase
@@ -50,30 +54,30 @@ namespace HWInternshipProject.ViewModels
             {
                 if (Password != ConfirmPassword)
                 {
-                    App.Current.MainPage?.DisplayAlert("Error", "Password and Confirm password do not match", "Ok");
+                    UserDialogs.Instance.Alert(TextResources.PasswordConfirmDontMatch, TextResources.Error, TextResources.Ok);
                     return;
                 }
 
                 switch (passwordValidator.IsPasswordValid(Password))
                 {
                     case PasswordValidationStatus.InvalidLength:
-                        App.Current.MainPage?.DisplayAlert("Error", "Password length must be greater than 8 and lower than 16", "Ok");
+                        UserDialogs.Instance.Alert(TextResources.PasswordLengthInvalid, TextResources.Error, TextResources.Ok);
                         return;
                     case PasswordValidationStatus.InvalidContent:
-                        App.Current.MainPage?.DisplayAlert("Error", "Password must contains minimum one digit and letter in UPPER case", "Ok");
+                        UserDialogs.Instance.Alert(TextResources.PaswordContentInvalid, TextResources.Error, TextResources.Ok);
                         return;
                 }
 
                 switch (loginValidator.IsLoginValid(Login))
                 {
                     case LoginValidationStatus.InvalidLength:
-                        App.Current.MainPage?.DisplayAlert("Error", "Login length must be greater than 4 and lower than 16", "Ok");
+                        UserDialogs.Instance.Alert(TextResources.LoginInvalidLengthError, TextResources.Error, TextResources.Ok);
                         return;
                     case LoginValidationStatus.StartsWithDigit:
-                        App.Current.MainPage?.DisplayAlert("Error", "Login must starts with letter", "Ok");
+                        UserDialogs.Instance.Alert(TextResources.LoginStartWithDigitError, TextResources.Error, TextResources.Ok);
                         return;
                     case LoginValidationStatus.LoginNotUnique:
-                        App.Current.MainPage?.DisplayAlert("Error", "This login already exist", "Ok");
+                        UserDialogs.Instance.Alert(TextResources.LoginNotUniqueError, TextResources.Error, TextResources.Ok);
                         return;
                 }
 

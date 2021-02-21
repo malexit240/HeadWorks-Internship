@@ -6,7 +6,8 @@ using Prism.Commands;
 using Prism.Common;
 using Prism.Navigation;
 using HWInternshipProject.Services.Models;
-
+using HWInternshipProject.Resources;
+using Acr.UserDialogs;
 
 namespace HWInternshipProject.ViewModels
 {
@@ -61,8 +62,17 @@ namespace HWInternshipProject.ViewModels
             this._profile = profile;
             DeleteCommand = new DelegateCommand(async () =>
             {
-                if (await App.Current.MainPage.DisplayAlert("Delete?", "Would you want to delete?", "Yes", "No"))
-                    profileService.RemoveProfile(_profile);
+                if (await UserDialogs.Instance.ConfirmAsync(new ConfirmConfig()
+                {
+                    Message = TextResources.WouldYouWantToDelete,
+                    OkText = TextResources.Yes,
+                    CancelText = TextResources.No,
+                    OnAction = (confirm) =>
+                    {
+                        if (confirm)
+                            profileService.RemoveProfile(_profile);
+                    }
+                })) ;
             });
 
             EditCommand = new DelegateCommand(() =>

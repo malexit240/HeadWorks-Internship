@@ -7,8 +7,10 @@ using Prism.Navigation;
 using HWInternshipProject.Models;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
+using Acr.UserDialogs;
 
 using HWInternshipProject.Services.Models;
+using HWInternshipProject.Resources;
 
 namespace HWInternshipProject.ViewModels
 {
@@ -84,7 +86,8 @@ namespace HWInternshipProject.ViewModels
 
                 if (NickName == "" || Name == "")
                 {
-                    App.Current.MainPage?.DisplayAlert("Error", "Fields 'Name' and 'Nikename' must be filled", "ok");
+                    UserDialogs.Instance.Alert(TextResources.Error, TextResources.FiledsNandNNmustbefilled, TextResources.Ok);
+
                     return;
                 }
 
@@ -99,19 +102,22 @@ namespace HWInternshipProject.ViewModels
 
             SelectImageCommand = new DelegateCommand(async () =>
             {
-
-                var choose = await App.Current.MainPage?.DisplayActionSheet("Choose action", "Cancel", null, "Pick at Gallery", "Take a photo with camera");
-                switch (choose)
+                UserDialogs.Instance.ActionSheet(new ActionSheetConfig()
                 {
-                    case "Pick at Gallery":
-                        var result = await FilePicker.PickAsync();
-                        ImageDestination = result?.FullPath ?? ImageDestination;
-                        break;
-                    case "Take a photo with camera":
+                    Message = TextResources.ChooseAction,
+                    Options = new List<ActionSheetOption>()
+                    {
+                        new ActionSheetOption(TextResources.PickAtGallery, async ()=>{
+                            var result = await FilePicker.PickAsync();
+                            ImageDestination = result?.FullPath ?? ImageDestination;
+                        },""),
 
-                        break;
-                }
+                        new ActionSheetOption(TextResources.TakeAPhotoWithCamera, async ()=>{
 
+                        },"")
+                    },
+                    Cancel = new ActionSheetOption(TextResources.Cancel)
+                });
             });
         }
     }

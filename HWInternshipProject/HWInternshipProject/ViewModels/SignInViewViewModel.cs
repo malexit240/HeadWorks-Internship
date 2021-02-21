@@ -10,6 +10,8 @@ using System.Windows.Input;
 using Xamarin.Forms;
 using HWInternshipProject.Models;
 using HWInternshipProject.Services.Models;
+using Acr.UserDialogs;
+using HWInternshipProject.Resources;
 
 
 namespace HWInternshipProject.ViewModels
@@ -50,7 +52,15 @@ namespace HWInternshipProject.ViewModels
                if (user != null)
                    await navigationService.NavigateAsync("MainListView", ("User", user));
                else
-                   App.Current.MainPage?.DisplayAlert("Error", "User not found", "Ok").ContinueWith((_) => { Password = ""; });
+                   UserDialogs.Instance.Alert(new AlertConfig()
+                   {
+                       Title = TextResources.Error,
+                       Message = TextResources.UserNotFound,
+                       OkText = TextResources.Ok,
+                       OnAction = () => Password = ""
+
+                   });
+               
 
            },
             () => Login.Length != 0 && Password.Length != 0
