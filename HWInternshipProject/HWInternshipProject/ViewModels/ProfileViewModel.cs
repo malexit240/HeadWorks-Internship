@@ -8,6 +8,8 @@ using Prism.Navigation;
 using HWInternshipProject.Services.Models;
 using HWInternshipProject.Resources;
 using Acr.UserDialogs;
+using HWInternshipProject.Views;
+using Xamarin.Forms;
 
 namespace HWInternshipProject.ViewModels
 {
@@ -60,9 +62,9 @@ namespace HWInternshipProject.ViewModels
             base(navigationService)
         {
             this._profile = profile;
-            DeleteCommand = new DelegateCommand(async () =>
+            DeleteCommand = new DelegateCommand(() =>
             {
-                if (await UserDialogs.Instance.ConfirmAsync(new ConfirmConfig()
+                UserDialogs.Instance.Confirm(new ConfirmConfig()
                 {
                     Message = TextResources.WouldYouWantToDelete,
                     OkText = TextResources.Yes,
@@ -72,7 +74,7 @@ namespace HWInternshipProject.ViewModels
                         if (confirm)
                             profileService.RemoveProfile(_profile);
                     }
-                })) ;
+                });
             });
 
             EditCommand = new DelegateCommand(() =>
@@ -82,12 +84,48 @@ namespace HWInternshipProject.ViewModels
 
             ShowModalImageCommand = new DelegateCommand(() =>
             {
-
-                var parameters = new NavigationParameters();
-                parameters.Add("ImageDestination", ImageDestination);
-
-                //navigationService.NavigateAsync("SizedProfileImagePage", parameters, true, true);
+                ModalConverter.OpenViewOnPage(PageUtilities.GetCurrentPage(App.Current.MainPage) as ContentPage, new SizedProfileImageView() { BindingContext = this });
             });
+        }
+    }
+
+    public static class ModalConverter
+    {
+        public static void OpenViewOnPage(ContentPage page, ContentView view)
+        {
+            var content = page.Content;
+
+            var absoluteLayout = new AbsoluteLayout();
+            AbsoluteLayout.SetLayoutBounds(content, new Rectangle(0, 0, 1, 1));
+            AbsoluteLayout.SetLayoutFlags(content, AbsoluteLayoutFlags.SizeProportional);
+            absoluteLayout.Children.Add(content);
+
+            var stack = new StackLayout();
+            AbsoluteLayout.SetLayoutBounds(stack, new Rectangle(0, 0, 1, 1));
+            AbsoluteLayout.SetLayoutFlags(stack, AbsoluteLayoutFlags.SizeProportional);
+            stack.BackgroundColor = Color.FromHex("#A0F0F0F0");
+
+            stack.GestureRecognizers.Add(new TapGestureRecognizer()
+            {
+                Command = new DelegateCommand(() =>
+                {
+                    CloseView(page);
+                })
+            });
+
+            view.HorizontalOptions = LayoutOptions.CenterAndExpand;
+            view.VerticalOptions = LayoutOptions.CenterAndExpand;
+            stack.Children.Add(view);
+
+            absoluteLayout.Children.Add(stack);
+
+            page.Content = absoluteLayout;
+
+        }
+
+        public static void CloseView(ContentPage page)
+        {
+            page.Content = (page.Content as AbsoluteLayout).Children[0];
         }
     }
 }

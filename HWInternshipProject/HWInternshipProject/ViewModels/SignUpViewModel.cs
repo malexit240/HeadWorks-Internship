@@ -15,7 +15,7 @@ using Acr.UserDialogs;
 
 namespace HWInternshipProject.ViewModels
 {
-    public class SignUpViewViewModel : ViewModelBase
+    public class SignUpViewModel : ViewModelBase
     {
         string _login = "";
         string _password = "";
@@ -47,7 +47,7 @@ namespace HWInternshipProject.ViewModels
         }
 
         public DelegateCommand SignUpCommand { get; set; }
-        public SignUpViewViewModel(INavigationService navigationService, ILoginValidatorService loginValidator, IPasswordValidatorService passwordValidator, IUserService userService) :
+        public SignUpViewModel(INavigationService navigationService, ILoginValidatorService loginValidator, IPasswordValidatorService passwordValidator, IUserService userService) :
             base(navigationService)
         {
             SignUpCommand = new DelegateCommand(() =>

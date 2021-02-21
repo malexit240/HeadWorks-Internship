@@ -12,7 +12,6 @@ using HWInternshipProject.Services.Models;
 
 namespace HWInternshipProject.ViewModels
 {
-
     public class MainListViewModel : ViewModelBase
     {
         User _user;
@@ -22,7 +21,6 @@ namespace HWInternshipProject.ViewModels
         public DelegateCommand AddProfileCommand { get; set; }
         public DelegateCommand LogOutCommand { get; set; }
         public DelegateCommand GoToSettingsViewCommand { get; set; }
-        public SizedProfileImagePageViewModel ModalContext { get; set; }
 
         public bool IsNoProfilesAdded
         {
@@ -53,7 +51,6 @@ namespace HWInternshipProject.ViewModels
                 case ProfilesListOrderBy.CreationTime:
                     _user.Profiles = _user.Profiles.OrderBy(p => p.CreationTime).ToList();
                     break;
-
             }
 
             foreach (var profile in _user.Profiles)
@@ -100,7 +97,6 @@ namespace HWInternshipProject.ViewModels
                 navigationService.NavigateAsync("SettingsView");
             });
 
-            ModalContext = new SizedProfileImagePageViewModel(navigationService);
         }
     }
 }

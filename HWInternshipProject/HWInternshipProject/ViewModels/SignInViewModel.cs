@@ -16,7 +16,7 @@ using HWInternshipProject.Resources;
 
 namespace HWInternshipProject.ViewModels
 {
-    public class SignInViewViewModel : ViewModelBase
+    public class SignInViewModel : ViewModelBase
     {
 
         string _login = "";
@@ -42,7 +42,7 @@ namespace HWInternshipProject.ViewModels
         public DelegateCommand SignInCommand { get; set; }
         public DelegateCommand SignUpCommand { get; set; }
 
-        public SignInViewViewModel(INavigationService navigationService, IUserService userService) :
+        public SignInViewModel(INavigationService navigationService, IUserService userService) :
             base(navigationService)
         {
             SignInCommand = new DelegateCommand(async () =>

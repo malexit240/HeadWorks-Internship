@@ -14,51 +14,52 @@
         <ToolbarItem IconImageSource="ic_settings3x.png"
                      Command="{Binding GoToSettingsViewCommand}"/>
     </ContentPage.ToolbarItems>
-    <Grid>
+    
+        <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <ScrollView Grid.Row="0" >
-            <StackLayout>
-                <ListView ItemsSource="{Binding Profiles}"
+
+        <StackLayout Grid.Row="0">
+            <ListView ItemsSource="{Binding Profiles}"
                           SelectionMode="None"
                           Style="{DynamicResource PageStyle}">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
 
-                                <ViewCell.ContextActions>
-                                    <MenuItem Command="{Binding DeleteCommand}"
+                            <ViewCell.ContextActions>
+                                <MenuItem Command="{Binding DeleteCommand}"
                                               Text="{x:Static resources:TextResources.Delete}"/>
-                                    <MenuItem Command="{Binding EditCommand}"
+                                <MenuItem Command="{Binding EditCommand}"
                                               Text="{x:Static resources:TextResources.Edit}"/>
-                                </ViewCell.ContextActions>
+                            </ViewCell.ContextActions>
 
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="1*"/>
-                                        <ColumnDefinition Width="4*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Image Grid.Column="0" 
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="4*"/>
+                                </Grid.ColumnDefinitions>
+                                <Image Grid.Column="0" 
                                            Source="{Binding ImageDestination}">
-                                        <Image.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding ShowModalImageCommand}"/>
-                                        </Image.GestureRecognizers>
-                                    </Image>
-                                    <StackLayout Grid.Column="1">
-                                        <Label Text="{Binding Name}"/>
-                                        <Label Text="{Binding NickName}"/>
-                                        <Label Text="{Binding Date}"/>
-                                    </StackLayout>
-                                </Grid>
-                            </ViewCell>
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding ShowModalImageCommand}"/>
+                                    </Image.GestureRecognizers>
+                                </Image>
+                                <StackLayout Grid.Column="1">
+                                    <Label Text="{Binding Name}"/>
+                                    <Label Text="{Binding NickName}"/>
+                                    <Label Text="{Binding Date}"/>
+                                </StackLayout>
+                            </Grid>
+                        </ViewCell>
 
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-                <Label Text="{x:Static resources:TextResources.NoAddedProfiles}" IsVisible="{Binding IsNoProfilesAdded}"/>
-            </StackLayout>
-        </ScrollView>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Label Text="{x:Static resources:TextResources.NoAddedProfiles}" IsVisible="{Binding IsNoProfilesAdded}"/>
+        </StackLayout>
+
         <Button Grid.Row="0" ImageSource="ic_add3x.png"
                 CornerRadius="40" 
                 VerticalOptions="End"
@@ -67,4 +68,5 @@
                 WidthRequest="80" 
                 Command="{Binding AddProfileCommand}"/>
     </Grid>
+
 </ContentPage>

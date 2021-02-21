@@ -9,7 +9,7 @@ using HWInternshipProject.Services.Settings;
 
 namespace HWInternshipProject.ViewModels
 {
-    public class SettingsViewViewModel : ViewModelBase
+    public class SettingsViewModel : ViewModelBase
     {
         ISettingsManager _settingsManager;
 
@@ -68,7 +68,7 @@ namespace HWInternshipProject.ViewModels
             }
         }
 
-        public SettingsViewViewModel(INavigationService navigationService, ISettingsManager settingsManager) :
+        public SettingsViewModel(INavigationService navigationService, ISettingsManager settingsManager) :
             base(navigationService)
         {
             _settingsManager = settingsManager;

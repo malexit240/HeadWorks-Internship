@@ -2,9 +2,9 @@
 
 namespace HWInternshipProject.Views
 {
-    public partial class SizedProfileImagePage : ContentPage
+    public partial class SizedProfileImageView : ContentView
     {
-        public SizedProfileImagePage()
+        public SizedProfileImageView()
         {
             InitializeComponent();
         }

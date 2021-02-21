@@ -8,6 +8,7 @@ using Xamarin.Essentials.Interfaces;
 using Xamarin.Essentials.Implementation;
 
 using Prism;
+using Prism.Commands;
 using Prism.Navigation;
 using Prism.Ioc;
 
@@ -69,12 +70,11 @@ namespace HWInternshipProject
             containerRegistry.RegisterInstance<IProfileService>(Container.Resolve<ProfileService>((typeof(IProfileManager), new ProfileManager())));
 
             containerRegistry.RegisterForNavigation<NavigationPage>();
-            containerRegistry.RegisterForNavigation<SignInView, SignInViewViewModel>();
+            containerRegistry.RegisterForNavigation<SignInView, SignInViewModel>();
             containerRegistry.RegisterForNavigation<MainListView, MainListViewModel>();
-            containerRegistry.RegisterForNavigation<SignUpView, SignUpViewViewModel>();
-            containerRegistry.RegisterForNavigation<AddEditProfileView, AddEditProfileViewViewModel>();
-            containerRegistry.RegisterForNavigation<SettingsView, SettingsViewViewModel>();
-            containerRegistry.RegisterForNavigation<SizedProfileImagePage, SizedProfileImagePageViewModel>();
+            containerRegistry.RegisterForNavigation<SignUpView, SignUpViewModel>();
+            containerRegistry.RegisterForNavigation<AddEditProfileView, AddEditProfileViewModel>();
+            containerRegistry.RegisterForNavigation<SettingsView, SettingsViewModel>();
         }
     }
 }

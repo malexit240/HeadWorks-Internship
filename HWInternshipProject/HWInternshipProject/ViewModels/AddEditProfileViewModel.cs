@@ -14,7 +14,7 @@ using HWInternshipProject.Resources;
 
 namespace HWInternshipProject.ViewModels
 {
-    public class AddEditProfileViewViewModel : ViewModelBase
+    public class AddEditProfileViewModel : ViewModelBase
     {
         bool _IsEdit = false;
         Profile _profile;
@@ -77,7 +77,7 @@ namespace HWInternshipProject.ViewModels
             }
         }
 
-        public AddEditProfileViewViewModel(INavigationService navigationService, IProfileService profileService) :
+        public AddEditProfileViewModel(INavigationService navigationService, IProfileService profileService) :
             base(navigationService)
         {
             _profile = new Profile() { UserId = User.Current.UserId };
@@ -91,8 +91,6 @@ namespace HWInternshipProject.ViewModels
                     return;
                 }
 
-
-
                 if (_IsEdit)
                     profileService.UpdateProfile(_profile);
                 else
@@ -100,7 +98,7 @@ namespace HWInternshipProject.ViewModels
                 navigationService.GoBackAsync();
             });
 
-            SelectImageCommand = new DelegateCommand(async () =>
+            SelectImageCommand = new DelegateCommand(() =>
             {
                 UserDialogs.Instance.ActionSheet(new ActionSheetConfig()
                 {
@@ -110,11 +108,12 @@ namespace HWInternshipProject.ViewModels
                         new ActionSheetOption(TextResources.PickAtGallery, async ()=>{
                             var result = await FilePicker.PickAsync();
                             ImageDestination = result?.FullPath ?? ImageDestination;
-                        },""),
+                        }),
 
                         new ActionSheetOption(TextResources.TakeAPhotoWithCamera, async ()=>{
-
-                        },"")
+                            var result = await MediaPicker.CapturePhotoAsync();
+                            ImageDestination = result?.FullPath ?? ImageDestination;
+                        })
                     },
                     Cancel = new ActionSheetOption(TextResources.Cancel)
                 });
