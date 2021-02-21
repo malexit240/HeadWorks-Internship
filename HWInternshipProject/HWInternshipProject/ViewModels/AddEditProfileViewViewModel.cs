@@ -8,6 +8,8 @@ using HWInternshipProject.Models;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 
+using HWInternshipProject.Services.Models;
+
 namespace HWInternshipProject.ViewModels
 {
     public class AddEditProfileViewViewModel : ViewModelBase
@@ -71,27 +73,45 @@ namespace HWInternshipProject.ViewModels
                 RaisePropertyChanged("Description");
                 RaisePropertyChanged("ImageDestination");
             }
-
-
         }
 
-        public AddEditProfileViewViewModel(INavigationService navigationService) :
+        public AddEditProfileViewViewModel(INavigationService navigationService, IProfileService profileService) :
             base(navigationService)
         {
             _profile = new Profile() { UserId = User.Current.UserId };
             AddSaveCommand = new DelegateCommand(() =>
             {
+
+                if (NickName == "" || Name == "")
+                {
+                    App.Current.MainPage?.DisplayAlert("Error", "Fields 'Name' and 'Nikename' must be filled", "ok");
+                    return;
+                }
+
+
+
                 if (_IsEdit)
-                    Profile.Update(_profile);
+                    profileService.UpdateProfile(_profile);
                 else
-                    Profile.Create(_profile);
+                    profileService.AddProfile(_profile);
                 navigationService.GoBackAsync();
             });
 
             SelectImageCommand = new DelegateCommand(async () =>
             {
-                var result = await FilePicker.PickAsync();
-                ImageDestination = result.FullPath;
+
+                var choose = await App.Current.MainPage?.DisplayActionSheet("Choose action", "Cancel", null, "Pick at Gallery", "Take a photo with camera");
+                switch (choose)
+                {
+                    case "Pick at Gallery":
+                        var result = await FilePicker.PickAsync();
+                        ImageDestination = result?.FullPath ?? ImageDestination;
+                        break;
+                    case "Take a photo with camera":
+
+                        break;
+                }
+
             });
         }
     }

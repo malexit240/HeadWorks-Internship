@@ -9,6 +9,7 @@ using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
 using HWInternshipProject.Models;
+using HWInternshipProject.Services.Models;
 
 
 namespace HWInternshipProject.ViewModels
@@ -39,12 +40,12 @@ namespace HWInternshipProject.ViewModels
         public DelegateCommand SignInCommand { get; set; }
         public DelegateCommand SignUpCommand { get; set; }
 
-        public SignInViewViewModel(INavigationService navigationService) :
+        public SignInViewViewModel(INavigationService navigationService, IUserService userService) :
             base(navigationService)
         {
             SignInCommand = new DelegateCommand(async () =>
            {
-               var user = await User.SignInAsync(Login, Password);
+               var user = await userService.SignInAsync(Login, Password);
 
                if (user != null)
                    await navigationService.NavigateAsync("MainListView", ("User", user));

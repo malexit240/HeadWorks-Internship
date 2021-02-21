@@ -5,6 +5,8 @@ using System.Globalization;
 using Prism.Commands;
 using Prism.Common;
 using Prism.Navigation;
+using HWInternshipProject.Services.Models;
+
 
 namespace HWInternshipProject.ViewModels
 {
@@ -51,18 +53,30 @@ namespace HWInternshipProject.ViewModels
         public DelegateCommand DeleteCommand { get; set; }
         public DelegateCommand EditCommand { get; set; }
 
-        public ProfileViewModel(INavigationService navigationService, Profile profile) :
+        public DelegateCommand ShowModalImageCommand { get; set; }
+
+        public ProfileViewModel(INavigationService navigationService, IProfileService profileService, Profile profile) :
             base(navigationService)
         {
             this._profile = profile;
-            DeleteCommand = new DelegateCommand(() =>
+            DeleteCommand = new DelegateCommand(async () =>
             {
-                this._profile.Delete();
+                if (await App.Current.MainPage.DisplayAlert("Delete?", "Would you want to delete?", "Yes", "No"))
+                    profileService.RemoveProfile(_profile);
             });
 
             EditCommand = new DelegateCommand(() =>
             {
                 navigationService.NavigateAsync("AddEditProfileView", ("profile", this._profile));
+            });
+
+            ShowModalImageCommand = new DelegateCommand(() =>
+            {
+
+                var parameters = new NavigationParameters();
+                parameters.Add("ImageDestination", ImageDestination);
+
+                //navigationService.NavigateAsync("SizedProfileImagePage", parameters, true, true);
             });
         }
     }

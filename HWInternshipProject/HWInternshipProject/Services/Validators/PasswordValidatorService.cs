@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace HWInternshipProject.Services
+namespace HWInternshipProject.Services.Validators
 {
     public class PasswordValidatorService : IPasswordValidatorService
     {
@@ -11,8 +11,7 @@ namespace HWInternshipProject.Services
                 return PasswordValidationStatus.InvalidLength;
 
             if ((from c in password where Char.IsDigit(c) select c).Count() == 0 ||
-                //(from c in password where Char.IsLetter(c) select c).Count() == 0 ||
-                (from c in password where Char.IsUpper(c) select c).Count() == 0)
+                (from c in password where Char.IsUpper(c) select c).Count() == 0)  //Is letter and is upper
                 return PasswordValidationStatus.InvalidContent;
 
             return PasswordValidationStatus.Valid;

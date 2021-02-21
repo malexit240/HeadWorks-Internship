@@ -7,6 +7,9 @@
              xmlns:resources="clr-namespace:HWInternshipProject.Resources"
              Title="{x:Static resources:TextResources.Title_AddEditProfile}">
 
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="ic_settings3x.png" Command="{Binding AddSaveCommand}" />
+    </ContentPage.ToolbarItems>
     <StackLayout>
         <Image Source="{Binding ImageDestination}" >
             <Image.GestureRecognizers>
@@ -16,10 +19,9 @@
         <Entry Placeholder="{x:Static resources:TextResources.NickName}" 
                Text="{Binding NickName}"/>
         <Entry Placeholder="{x:Static resources:TextResources.Name}" 
-               Text="{Binding Name}"/>
+               Text="{Binding Name}"
+               MaxLength="120"/>
         <Editor Placeholder="{x:Static resources:TextResources.Description}"
                 Text="{Binding Description}"/>
-        <Button Text="{x:Static resources:TextResources.Save}"
-                Command="{Binding AddSaveCommand}"/>
     </StackLayout>
 </ContentPage>

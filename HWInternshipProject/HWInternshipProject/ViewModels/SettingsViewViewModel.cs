@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Globalization;
 using Prism.Navigation;
-using HWInternshipProject.Services;
+using HWInternshipProject.Services.Settings;
 
 namespace HWInternshipProject.ViewModels
 {

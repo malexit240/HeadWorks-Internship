@@ -7,7 +7,8 @@ using HWInternshipProject.Models;
 using System.Collections.ObjectModel;
 using Xamarin.Forms;
 using Prism.Common;
-using HWInternshipProject.Services;
+using HWInternshipProject.Services.Settings;
+using HWInternshipProject.Services.Models;
 
 namespace HWInternshipProject.ViewModels
 {
@@ -21,6 +22,7 @@ namespace HWInternshipProject.ViewModels
         public DelegateCommand AddProfileCommand { get; set; }
         public DelegateCommand LogOutCommand { get; set; }
         public DelegateCommand GoToSettingsViewCommand { get; set; }
+        public SizedProfileImagePageViewModel ModalContext { get; set; }
 
         public bool IsNoProfilesAdded
         {
@@ -56,7 +58,7 @@ namespace HWInternshipProject.ViewModels
 
             foreach (var profile in _user.Profiles)
             {
-                Profiles.Add(new ProfileViewModel(NavigationService, profile));
+                Profiles.Add(new ProfileViewModel(NavigationService, (IProfileService)App.Current.Container.CurrentScope.Resolve(typeof(IProfileService)), profile));
             }
 
             RaisePropertyChanged("IsNoProfilesAdded");
@@ -68,14 +70,14 @@ namespace HWInternshipProject.ViewModels
             base.OnNavigatedTo(parameters);
             _user = User.Current;
             ReloadProfiles();
-
         }
 
 
-        public MainListViewModel(INavigationService navigationService, ISettingsManager settingsManager) :
+        public MainListViewModel(INavigationService navigationService, ISettingsManager settingsManager, IUserService userService) :
             base(navigationService)
         {
             SettingsManager = settingsManager;
+
             Profile.Actualize += (sender, args) =>
             {
                 _user = User.Current;
@@ -89,7 +91,7 @@ namespace HWInternshipProject.ViewModels
 
             LogOutCommand = new DelegateCommand(() =>
             {
-                User.LogOut();
+                userService.LogOut();
                 navigationService.GoBackToRootAsync();
             });
 
@@ -97,6 +99,8 @@ namespace HWInternshipProject.ViewModels
             {
                 navigationService.NavigateAsync("SettingsView");
             });
+
+            ModalContext = new SizedProfileImagePageViewModel(navigationService);
         }
     }
 }

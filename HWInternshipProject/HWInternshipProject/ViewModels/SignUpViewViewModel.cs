@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using HWInternshipProject.Services;
 using HWInternshipProject.Models;
+using HWInternshipProject.Services.Validators;
+using HWInternshipProject.Services.Models;
 
 namespace HWInternshipProject.ViewModels
 {
@@ -41,7 +43,7 @@ namespace HWInternshipProject.ViewModels
         }
 
         public DelegateCommand SignUpCommand { get; set; }
-        public SignUpViewViewModel(INavigationService navigationService) :
+        public SignUpViewViewModel(INavigationService navigationService, ILoginValidatorService loginValidator, IPasswordValidatorService passwordValidator, IUserService userService) :
             base(navigationService)
         {
             SignUpCommand = new DelegateCommand(() =>
@@ -52,7 +54,7 @@ namespace HWInternshipProject.ViewModels
                     return;
                 }
 
-                switch (new PasswordValidatorService().IsPasswordValid(Password))
+                switch (passwordValidator.IsPasswordValid(Password))
                 {
                     case PasswordValidationStatus.InvalidLength:
                         App.Current.MainPage?.DisplayAlert("Error", "Password length must be greater than 8 and lower than 16", "Ok");
@@ -62,7 +64,7 @@ namespace HWInternshipProject.ViewModels
                         return;
                 }
 
-                switch (new LoginValidatorService().IsLoginValid(Login))
+                switch (loginValidator.IsLoginValid(Login))
                 {
                     case LoginValidationStatus.InvalidLength:
                         App.Current.MainPage?.DisplayAlert("Error", "Login length must be greater than 4 and lower than 16", "Ok");
@@ -70,13 +72,12 @@ namespace HWInternshipProject.ViewModels
                     case LoginValidationStatus.StartsWithDigit:
                         App.Current.MainPage?.DisplayAlert("Error", "Login must starts with letter", "Ok");
                         return;
-
                     case LoginValidationStatus.LoginNotUnique:
                         App.Current.MainPage?.DisplayAlert("Error", "This login already exist", "Ok");
                         return;
                 }
 
-                User.Create(Login, Password);
+                userService.SignUp(Login, Password);
                 navigationService.GoBackAsync(("Login", Login));
 
 

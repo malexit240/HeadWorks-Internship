@@ -1,4 +1,4 @@
-﻿namespace HWInternshipProject.Services
+﻿namespace HWInternshipProject.Services.Validators
 {
     public interface ILoginValidatorService
     {

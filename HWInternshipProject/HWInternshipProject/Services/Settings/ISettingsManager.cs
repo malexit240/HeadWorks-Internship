@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
 
-namespace HWInternshipProject.Services
+namespace HWInternshipProject.Services.Settings
 {
     public interface ISettingsManager
     {

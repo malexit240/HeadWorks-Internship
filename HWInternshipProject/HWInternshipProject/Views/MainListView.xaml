@@ -14,7 +14,6 @@
         <ToolbarItem IconImageSource="ic_settings3x.png"
                      Command="{Binding GoToSettingsViewCommand}"/>
     </ContentPage.ToolbarItems>
-
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -40,7 +39,12 @@
                                         <ColumnDefinition Width="1*"/>
                                         <ColumnDefinition Width="4*"/>
                                     </Grid.ColumnDefinitions>
-                                    <Image Grid.Column="0" Source="{Binding ImageDestination}"/>
+                                    <Image Grid.Column="0" 
+                                           Source="{Binding ImageDestination}">
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding ShowModalImageCommand}"/>
+                                        </Image.GestureRecognizers>
+                                    </Image>
                                     <StackLayout Grid.Column="1">
                                         <Label Text="{Binding Name}"/>
                                         <Label Text="{Binding NickName}"/>

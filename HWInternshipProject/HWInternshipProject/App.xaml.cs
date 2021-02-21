@@ -1,17 +1,21 @@
-using HWInternshipProject.ViewModels;
-using HWInternshipProject.Views;
-using Prism;
-using Prism.Ioc;
-using Xamarin.Essentials.Implementation;
-using Xamarin.Essentials.Interfaces;
-using Xamarin.Forms;
-using System.Resources;
-using Prism.Navigation;
-using HWInternshipProject.Services;
-using System.Collections.Generic;
 using System;
-using Xamarin.Essentials;
+using System.Collections.Generic;
+using System.Resources;
 
+using Xamarin.Forms;
+using Xamarin.Essentials;
+using Xamarin.Essentials.Interfaces;
+using Xamarin.Essentials.Implementation;
+
+using Prism;
+using Prism.Navigation;
+using Prism.Ioc;
+
+using HWInternshipProject.Views;
+using HWInternshipProject.ViewModels;
+using HWInternshipProject.Services.Models;
+using HWInternshipProject.Services.Settings;
+using HWInternshipProject.Services.Validators;
 
 namespace HWInternshipProject
 {
@@ -53,12 +57,24 @@ namespace HWInternshipProject
 
             containerRegistry.RegisterInstance<ISettingsManager>(Container.Resolve<SettingsManager>());
 
+
+
+            containerRegistry.RegisterInstance<ILoginValidatorService>(Container.Resolve<LoginValidatorService>((typeof(IUserManager), new UserManager())));
+            containerRegistry.RegisterInstance<IPasswordValidatorService>(Container.Resolve<PasswordValidatorService>());
+
+            containerRegistry.RegisterInstance<IUserManager>(Container.Resolve<UserManager>());
+            containerRegistry.RegisterInstance<IUserService>(Container.Resolve<UserService>());
+
+            containerRegistry.RegisterInstance<IProfileManager>(Container.Resolve<ProfileManager>());
+            containerRegistry.RegisterInstance<IProfileService>(Container.Resolve<ProfileService>((typeof(IProfileManager), new ProfileManager())));
+
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<SignInView, SignInViewViewModel>();
             containerRegistry.RegisterForNavigation<MainListView, MainListViewModel>();
             containerRegistry.RegisterForNavigation<SignUpView, SignUpViewViewModel>();
             containerRegistry.RegisterForNavigation<AddEditProfileView, AddEditProfileViewViewModel>();
             containerRegistry.RegisterForNavigation<SettingsView, SettingsViewViewModel>();
+            containerRegistry.RegisterForNavigation<SizedProfileImagePage, SizedProfileImagePageViewModel>();
         }
     }
 }

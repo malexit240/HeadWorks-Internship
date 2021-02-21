@@ -3,7 +3,7 @@ using System.Globalization;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
-namespace HWInternshipProject.Services
+namespace HWInternshipProject.Services.Settings
 {
 
     public class SettingsManager : ISettingsManager
