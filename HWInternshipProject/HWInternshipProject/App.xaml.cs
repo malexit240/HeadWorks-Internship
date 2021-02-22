@@ -41,7 +41,7 @@ namespace HWInternshipProject
             var login = this.Properties["login"];
             var password = this.Properties["password"];
 
-            System.Globalization.CultureInfo.CurrentCulture = new SettingsManager().CurrentCultureInfo;
+            System.Globalization.CultureInfo.CurrentUICulture = new SettingsManager().CurrentCultureInfo;
 
             App.Current.Resources.MergedDictionaries.Clear();
             if (new SettingsManager().Theme == Theme.Light)

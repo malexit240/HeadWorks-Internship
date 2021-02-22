@@ -55,7 +55,9 @@ namespace HWInternshipProject.ViewModels
             set
             {
                 if (value)
+                {
                     _settingsManager.CurrentCultureInfo = new CultureInfo("en-US");
+                }
             }
         }
 

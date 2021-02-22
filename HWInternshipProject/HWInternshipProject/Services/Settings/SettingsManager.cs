@@ -35,7 +35,7 @@ namespace HWInternshipProject.Services.Settings
             set
             {
                 Preferences.Set(nameof(CurrentCultureInfo), (string)value.Name);
-                System.Globalization.CultureInfo.CurrentCulture = value;
+                System.Globalization.CultureInfo.CurrentUICulture = value;
             }
         }
     }

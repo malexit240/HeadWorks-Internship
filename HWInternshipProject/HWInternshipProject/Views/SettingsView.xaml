@@ -9,28 +9,37 @@
              Title="{x:Static resources:TextResources.Title_SettingsView}">
 
     <StackLayout>
-        <Label Text="{x:Static resources:TextResources.ProfilesListOrderBy}"/>
-        <RadioButton Text ="{x:Static resources:TextResources.NickName}" 
+        <StackLayout>
+
+
+            <Label Text="{x:Static resources:TextResources.ProfilesListOrderBy}"/>
+            <RadioButton Text ="{x:Static resources:TextResources.NickName}" 
                      IsChecked="{Binding OrderBy_NickName}"
                      GroupName="OrderBy"/>
-        <RadioButton Text="{x:Static resources:TextResources.Name}" 
+            <RadioButton Text="{x:Static resources:TextResources.Name}" 
                      IsChecked="{Binding OrderBy_Name}"
                      GroupName="OrderBy"/>
-        <RadioButton Text="{x:Static resources:TextResources.CreationTime}"
+            <RadioButton Text="{x:Static resources:TextResources.CreationTime}"
                      IsChecked="{Binding OrderBy_CreationTime}"
                      GroupName="OrderBy"/>
+        </StackLayout>
 
         <Label Text="{x:Static resources:TextResources.Theme}"/>
         <Switch IsToggled="{Binding IsLightTheme}"/>
 
-
-        <Label Text="{x:Static resources:TextResources.Choose_language}"/>
-        <RadioButton Text="{x:Static resources:TextResources.English}" 
+        <StackLayout>
+            <Label Text="{x:Static resources:TextResources.Choose_language}"/>
+            <RadioButton Text="{x:Static resources:TextResources.English}" 
                      IsChecked="{Binding IsEn_US}"
                      GroupName="LanguageChoose"/>
-        <RadioButton Text="{x:Static resources:TextResources.Russian}"
+            <RadioButton  Text="{x:Static resources:TextResources.Russian}"
                      IsChecked="{Binding IsRu_RU}"
                      GroupName="LanguageChoose"/>
+
+            <RadioButton  Text="123"
+                     IsChecked="False"
+                     GroupName="LanguageChoose"/>
+        </StackLayout>
 
     </StackLayout>
 </ContentPage>

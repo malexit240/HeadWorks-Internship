@@ -1,14 +1,16 @@
 ﻿using Acr.UserDialogs;
 using Android.App;
+using Android.Content;
 using Android.Content.PM;
 using Android.OS;
+using HWInternshipProject.Services.Settings;
 using Prism;
 using Prism.Ioc;
 
 namespace HWInternshipProject.Droid
 {
     [Activity(Theme = "@style/MainTheme",
-              ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation | ConfigChanges.UiMode | ConfigChanges.ScreenLayout | ConfigChanges.SmallestScreenSize)]
+              ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation | ConfigChanges.UiMode | ConfigChanges.ScreenLayout | ConfigChanges.SmallestScreenSize | ConfigChanges.Locale)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)
@@ -20,6 +22,7 @@ namespace HWInternshipProject.Droid
             global::Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             UserDialogs.Init(this);
+
             LoadApplication(new App(new AndroidInitializer()));
         }
 
