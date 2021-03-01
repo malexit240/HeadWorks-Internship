@@ -1,14 +1,12 @@
-﻿using Prism.Commands;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Prism.Navigation;
-using HWInternshipProject.Models;
+﻿using System.Linq;
 using System.Collections.ObjectModel;
-using Xamarin.Forms;
-using Prism.Common;
-using HWInternshipProject.Services.Settings;
+using System.Threading.Tasks;
+using Prism.Commands;
+using Prism.Navigation;
+using HWInternshipProject.Views;
+using HWInternshipProject.Models;
 using HWInternshipProject.Services.Models;
+using HWInternshipProject.Services.Settings;
 
 namespace HWInternshipProject.ViewModels
 {
@@ -16,24 +14,22 @@ namespace HWInternshipProject.ViewModels
     {
         User _user;
         ObservableCollection<ProfileViewModel> _profiles = new ObservableCollection<ProfileViewModel>();
+
         protected ISettingsManager SettingsManager { get; private set; }
 
         public DelegateCommand AddProfileCommand { get; set; }
         public DelegateCommand LogOutCommand { get; set; }
         public DelegateCommand GoToSettingsViewCommand { get; set; }
 
-        public bool IsNoProfilesAdded
-        {
-            get => Profiles.Count == 0;
-        }
+
+        public bool IsNoProfilesAdded { get => Profiles.Count == 0; }
+
+        public bool IsListVisible { get => !IsNoProfilesAdded; }
 
         public ObservableCollection<ProfileViewModel> Profiles
         {
-            get { return _profiles; }
-            set
-            {
-                SetProperty(ref _profiles, value);
-            }
+            get => _profiles;
+            set => SetProperty(ref _profiles, value);
         }
 
         private void ReloadProfiles()
@@ -54,19 +50,20 @@ namespace HWInternshipProject.ViewModels
             }
 
             foreach (var profile in _user.Profiles)
-            {
-                Profiles.Add(new ProfileViewModel(NavigationService, (IProfileService)App.Current.Container.CurrentScope.Resolve(typeof(IProfileService)), profile));
-            }
+                Profiles.Add(new ProfileViewModel(NavigationService, (IProfileService)(App.Current.Container.Resolve(typeof(IProfileService))), profile));
 
-            RaisePropertyChanged("IsNoProfilesAdded");
+            RaisePropertyChanged(nameof(IsNoProfilesAdded));
+            RaisePropertyChanged(nameof(IsListVisible));
 
         }
 
-        public override void OnNavigatedTo(INavigationParameters parameters)
+        public override Task InitializeAsync(INavigationParameters parameters)
         {
-            base.OnNavigatedTo(parameters);
-            _user = User.Current;
-            ReloadProfiles();
+            return Task.Run(() =>
+            {
+                _user = User.Current;
+                ReloadProfiles();
+            });
         }
 
 
@@ -75,15 +72,18 @@ namespace HWInternshipProject.ViewModels
         {
             SettingsManager = settingsManager;
 
-            Profile.Actualize += (sender, args) =>
+            Profile.Actualize += async (sender, args) =>
             {
-                _user = User.Current;
-                ReloadProfiles();
+                await Task.Run(() =>
+                {
+                    _user = User.Current;
+                    ReloadProfiles();
+                });
             };
 
             AddProfileCommand = new DelegateCommand(() =>
             {
-                navigationService.NavigateAsync("AddEditProfileView");
+                navigationService.NavigateAsync(nameof(AddEditProfileView));
             });
 
             LogOutCommand = new DelegateCommand(() =>
@@ -94,7 +94,7 @@ namespace HWInternshipProject.ViewModels
 
             GoToSettingsViewCommand = new DelegateCommand(() =>
             {
-                navigationService.NavigateAsync("SettingsView");
+                navigationService.NavigateAsync(nameof(SettingsView));
             });
 
         }

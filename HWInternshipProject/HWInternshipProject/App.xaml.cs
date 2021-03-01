@@ -17,9 +17,11 @@ using HWInternshipProject.ViewModels;
 using HWInternshipProject.Services.Models;
 using HWInternshipProject.Services.Settings;
 using HWInternshipProject.Services.Validators;
+using Xamarin.Forms.Xaml;
 
 namespace HWInternshipProject
 {
+    [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class App
     {
         public App(IPlatformInitializer initializer)
@@ -41,14 +43,15 @@ namespace HWInternshipProject
             var login = this.Properties["login"];
             var password = this.Properties["password"];
 
-            System.Globalization.CultureInfo.CurrentUICulture = new SettingsManager().CurrentCultureInfo;
+            //System.Globalization.CultureInfo.CurrentUICulture = new SettingsManager().CurrentCultureInfo;
+
+            new SettingsManager().CurrentCultureInfo = new SettingsManager().CurrentCultureInfo;
 
             App.Current.Resources.MergedDictionaries.Clear();
             if (new SettingsManager().Theme == Theme.Light)
                 App.Current.Resources.MergedDictionaries.Add(new LightTheme());
             else
                 App.Current.Resources.MergedDictionaries.Add(new DarkTheme());
-
             await NavigationService.NavigateAsync("NavigationPage/SignInView", ("Login", login), ("Password", password));
         }
 
@@ -57,8 +60,6 @@ namespace HWInternshipProject
             containerRegistry.RegisterSingleton<IAppInfo, AppInfoImplementation>();
 
             containerRegistry.RegisterInstance<ISettingsManager>(Container.Resolve<SettingsManager>());
-
-
 
             containerRegistry.RegisterInstance<ILoginValidatorService>(Container.Resolve<LoginValidatorService>((typeof(IUserManager), new UserManager())));
             containerRegistry.RegisterInstance<IPasswordValidatorService>(Container.Resolve<PasswordValidatorService>());
@@ -75,6 +76,7 @@ namespace HWInternshipProject
             containerRegistry.RegisterForNavigation<SignUpView, SignUpViewModel>();
             containerRegistry.RegisterForNavigation<AddEditProfileView, AddEditProfileViewModel>();
             containerRegistry.RegisterForNavigation<SettingsView, SettingsViewModel>();
+            containerRegistry.RegisterForNavigation<SizedProfileImagePage, SizedProfileImagePageViewModel>();
         }
     }
 }

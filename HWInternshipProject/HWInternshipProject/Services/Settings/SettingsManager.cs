@@ -2,6 +2,7 @@
 using System.Globalization;
 using Xamarin.Essentials;
 using Xamarin.Forms;
+using HWInternshipProject.Models;
 
 namespace HWInternshipProject.Services.Settings
 {

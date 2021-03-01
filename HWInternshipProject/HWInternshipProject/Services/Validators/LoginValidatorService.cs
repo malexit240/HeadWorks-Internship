@@ -5,13 +5,9 @@ namespace HWInternshipProject.Services.Validators
 {
     public class LoginValidatorService : ILoginValidatorService
     {
-
         IUserManager _userManager;
 
-        public LoginValidatorService(IUserManager userManager)
-        {
-            _userManager = userManager;
-        }
+        public LoginValidatorService(IUserManager userManager) => _userManager = userManager;
 
         public LoginValidationStatus IsLoginValid(string login)
         {
@@ -20,7 +16,7 @@ namespace HWInternshipProject.Services.Validators
             if (Char.IsDigit(login[0]))
                 return LoginValidationStatus.StartsWithDigit;
 
-            if (!_userManager.IsLoginUnique(login))
+            if (!_userManager.IsLoginUnique(login).Result)
                 return LoginValidationStatus.LoginNotUnique;
 
             return LoginValidationStatus.Valid;

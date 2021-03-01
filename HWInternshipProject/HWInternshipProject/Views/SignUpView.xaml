@@ -4,17 +4,26 @@
              xmlns:prism="http://prismlibrary.com"
              xmlns:resources="clr-namespace:HWInternshipProject.Resources"
              prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="HWInternshipProject.Views.SignUpView">
-    <StackLayout>
-        <Entry Placeholder="{x:Static resources:TextResources.Login}"
-               Text="{Binding Login}"/>
-        <Entry Placeholder="{x:Static resources:TextResources.Password}"
+             x:Class="HWInternshipProject.Views.SignUpView"
+             Style="{DynamicResource pageStyle}">
+
+    <StackLayout Margin="20, 5">
+        <StackLayout VerticalOptions="CenterAndExpand">
+            <Entry Placeholder="{x:Static resources:TextResources.Login}"
+               Text="{Binding Login}"
+                   Style="{DynamicResource entryStyle}"/>
+            <Entry Placeholder="{x:Static resources:TextResources.Password}"
                Text="{Binding Password}"
-               IsPassword="True"/>
-        <Entry Placeholder="{x:Static resources:TextResources.ConfirmPassword}"
+               IsPassword="True"
+               Style="{DynamicResource entryStyle}"/>
+            <Entry Placeholder="{x:Static resources:TextResources.ConfirmPassword}"
                Text="{Binding ConfirmPassword}"
-               IsPassword="True"/>
+               IsPassword="True"
+               Style="{DynamicResource entryStyle}"/>
+        </StackLayout>
         <Button Text="{x:Static resources:TextResources.SignUp}"
-                Command="{Binding SignUpCommand}"/>
+                Command="{Binding SignUpCommand}"
+                Style="{DynamicResource buttonStyle}"
+                Margin="0,0,0,60"/>
     </StackLayout>
 </ContentPage>

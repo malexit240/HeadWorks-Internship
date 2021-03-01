@@ -5,23 +5,31 @@
              xmlns:resources="clr-namespace:HWInternshipProject.Resources"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="HWInternshipProject.Views.SignInView"
-             Title="{x:Static resources:TextResources.Title_UserSignIn}">
+             Title="{x:Static resources:TextResources.Title_UserSignIn}"
+             Style="{DynamicResource pageStyle}">
 
-    <StackLayout>
-        <Entry Placeholder="{x:Static resources:TextResources.Login}"
-               Text="{Binding Login}"/>
-        <Entry Placeholder="{x:Static resources:TextResources.Password}"
+    <StackLayout Margin="20, 5">
+        <ActivityIndicator IsRunning="{Binding HasLongActivity}" 
+                           Style="{DynamicResource activityIndicatorStyle}"/>
+        <StackLayout VerticalOptions="CenterAndExpand" >
+            <Entry Placeholder="{x:Static resources:TextResources.Login}"
+               Text="{Binding Login}"
+               Style="{DynamicResource entryStyle}"/>
+            <Entry Placeholder="{x:Static resources:TextResources.Password}"
                Text="{Binding Password}"
-               IsPassword="True">
-        </Entry>
-        <Button Text="{x:Static resources:TextResources.SignIn}"
-                Command="{Binding SignInCommand}"/>
-        <Label Text="{x:Static resources:TextResources.SignUp}"
-               TextColor="Blue"
-               TextDecorations="Underline">
-            <Label.GestureRecognizers>
-                <TapGestureRecognizer Command="{Binding SignUpCommand}"/>
-            </Label.GestureRecognizers>
-        </Label>
+               IsPassword="True"
+               Style="{DynamicResource entryStyle}"/>
+        </StackLayout>
+        <StackLayout VerticalOptions="End" Margin="0,0,0,60">
+            <Button Text="{x:Static resources:TextResources.SignIn}"
+                Command="{Binding SignInCommand}"
+                Style="{DynamicResource buttonStyle}"/>
+            <Label Text="{x:Static resources:TextResources.SignUp}"   
+               Style="{DynamicResource labelLinkStyle}">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SignUpCommand}"/>
+                </Label.GestureRecognizers>
+            </Label>
+        </StackLayout>
     </StackLayout>
 </ContentPage>

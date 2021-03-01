@@ -1,28 +1,32 @@
 ﻿using System;
+using System.Threading.Tasks;
 using HWInternshipProject.Models;
 namespace HWInternshipProject.Services.Models
 {
     public class ProfileManager : IProfileManager
     {
-        public Profile Create(Profile profile)
+        public async Task<Profile> Create(Profile profile)
         {
-            using (var context = new Context())
+            return await Task.Run(() =>
             {
-                if (context.users.Find(profile.UserId) == null)
-                    throw new NullReferenceException();
+                using (var context = new Context())
+                {
+                    if (context.users.Find(profile.UserId) == null)
+                        throw new NullReferenceException();
 
-                profile.CreationTime = DateTime.Now;
+                    profile.CreationTime = DateTime.Now;
 
-                context.profiles.Add(profile);
-                context.SaveChanges();
-                return profile;
-            }
+                    context.profiles.Add(profile);
+                    context.SaveChanges();
+                    profile.RaiseActualize();
+                    return profile;
+                }
+            });
         }
 
-        public Profile Create(Guid user_id, string nick, string name, string description = "", string imageDestination = "")
+        public async Task<Profile> Create(Guid user_id, string nick, string name, string description = "", string imageDestination = "")
         {
-
-            return Create(new Profile()
+            return await Create(new Profile()
             {
                 UserId = user_id,
                 ImageDestination = imageDestination,
@@ -32,25 +36,31 @@ namespace HWInternshipProject.Services.Models
             });
         }
 
-        public void Update(Profile profile)
+        public async void Update(Profile profile)
         {
-            using (var context = new Context())
+            await Task.Run(() =>
             {
-                context.profiles.Update(profile);
-                context.SaveChanges();
+                using (var context = new Context())
+                {
+                    context.profiles.Update(profile);
+                    context.SaveChanges();
 
-                profile.RaiseActualize();
-            }
+                    profile.RaiseActualize();
+                }
+            });
         }
 
-        public void Delete(Profile profile)
+        public async void Delete(Profile profile)
         {
-            using (var context = new Context())
+            await Task.Run(() =>
             {
-                context.profiles.Remove(profile);
-                context.SaveChanges();
-                profile.RaiseActualize();
-            }
+                using (var context = new Context())
+                {
+                    context.profiles.Remove(profile);
+                    context.SaveChanges();
+                    profile.RaiseActualize();
+                }
+            });
         }
 
 

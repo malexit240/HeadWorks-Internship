@@ -313,7 +313,7 @@ namespace HWInternshipProject.Resources {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на SignIn.
+        ///   Ищет локализованную строку, похожую на SIGN IN.
         /// </summary>
         internal static string SignIn {
             get {
@@ -322,7 +322,7 @@ namespace HWInternshipProject.Resources {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на SignUp.
+        ///   Ищет локализованную строку, похожую на SIGN UP.
         /// </summary>
         internal static string SignUp {
             get {

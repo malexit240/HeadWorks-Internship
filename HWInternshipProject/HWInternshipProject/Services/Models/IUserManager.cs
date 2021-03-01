@@ -1,4 +1,5 @@
 ﻿using HWInternshipProject.Models;
+using System.Threading.Tasks;
 
 namespace HWInternshipProject.Services.Models
 {
@@ -6,9 +7,9 @@ namespace HWInternshipProject.Services.Models
     {
         IUserManager Instance { get; }
 
-        User Create(string login, string password);
+        Task<User> Create(string login, string password);
         void Update();
         void Delete();
-        bool IsLoginUnique(string login);
+        Task<bool> IsLoginUnique(string login);
     }
 }

@@ -202,10 +202,10 @@
     <value>Save</value>
   </data>
   <data name="SignIn" xml:space="preserve">
-    <value>SignIn</value>
+    <value>SIGN IN</value>
   </data>
   <data name="SignUp" xml:space="preserve">
-    <value>SignUp</value>
+    <value>SIGN UP</value>
   </data>
   <data name="TakeAPhotoWithCamera" xml:space="preserve">
     <value>Take a photo with camera</value>

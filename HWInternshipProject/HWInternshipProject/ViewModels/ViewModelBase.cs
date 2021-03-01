@@ -6,13 +6,14 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 using HWInternshipProject.Services;
+using System.Threading.Tasks;
 
 namespace HWInternshipProject.ViewModels
 {
-    public class ViewModelBase : BindableBase, IInitialize, INavigationAware, IDestructible
+    public class ViewModelBase : BindableBase, IInitialize, INavigationAware, IDestructible, IInitializeAsync
     {
         protected INavigationService NavigationService { get; private set; }
-        
+
 
         private string _title;
         public string Title
@@ -42,6 +43,11 @@ namespace HWInternshipProject.ViewModels
         }
 
         public virtual void Destroy()
+        {
+
+        }
+
+        public virtual async Task InitializeAsync(INavigationParameters parameters)
         {
 
         }

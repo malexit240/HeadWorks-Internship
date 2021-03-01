@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace HWInternshipProject
+namespace HWInternshipProject.Styles
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class DeleteMe : ContentPage
+    public partial class Styles : ResourceDictionary
     {
-        public DeleteMe()
+        public Styles()
         {
             InitializeComponent();
         }

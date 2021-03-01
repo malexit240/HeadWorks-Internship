@@ -41,7 +41,7 @@ namespace HWInternshipProject.ViewModels
         {
             get
             {
-                return _profile.CreationTime.Date.ToString(CultureInfo.CurrentCulture.DateTimeFormat.LongDatePattern);
+                return _profile.CreationTime.Date.ToString(CultureInfo.CurrentUICulture.DateTimeFormat.LongDatePattern);
             }
         }
 
@@ -56,7 +56,7 @@ namespace HWInternshipProject.ViewModels
         public DelegateCommand DeleteCommand { get; set; }
         public DelegateCommand EditCommand { get; set; }
 
-        public DelegateCommand ShowModalImageCommand { get; set; }
+        public DelegateCommand OpenProfileImageCommand { get; set; }
 
         public ProfileViewModel(INavigationService navigationService, IProfileService profileService, Profile profile) :
             base(navigationService)
@@ -79,53 +79,15 @@ namespace HWInternshipProject.ViewModels
 
             EditCommand = new DelegateCommand(() =>
             {
-                navigationService.NavigateAsync("AddEditProfileView", ("profile", this._profile));
+                navigationService.NavigateAsync(nameof(AddEditProfileView), ("profile", this._profile));
             });
 
-            ShowModalImageCommand = new DelegateCommand(() =>
+            OpenProfileImageCommand = new DelegateCommand(() =>
             {
-                ModalConverter.OpenViewOnPage(PageUtilities.GetCurrentPage(App.Current.MainPage) as ContentPage, new SizedProfileImageView() { BindingContext = this });
+                var parameters = new NavigationParameters();
+                parameters.Add(nameof(ImageDestination), ImageDestination);
+                navigationService.NavigateAsync($"{nameof(SizedProfileImagePage)}", parameters, true, false);
             });
-        }
-    }
-
-    public static class ModalConverter
-    {
-        public static void OpenViewOnPage(ContentPage page, ContentView view)
-        {
-            var content = page.Content;
-
-            var absoluteLayout = new AbsoluteLayout();
-            AbsoluteLayout.SetLayoutBounds(content, new Rectangle(0, 0, 1, 1));
-            AbsoluteLayout.SetLayoutFlags(content, AbsoluteLayoutFlags.SizeProportional);
-            absoluteLayout.Children.Add(content);
-
-            var stack = new StackLayout();
-            AbsoluteLayout.SetLayoutBounds(stack, new Rectangle(0, 0, 1, 1));
-            AbsoluteLayout.SetLayoutFlags(stack, AbsoluteLayoutFlags.SizeProportional);
-            stack.BackgroundColor = Color.FromHex("#A0F0F0F0");
-
-            stack.GestureRecognizers.Add(new TapGestureRecognizer()
-            {
-                Command = new DelegateCommand(() =>
-                {
-                    CloseView(page);
-                })
-            });
-
-            view.HorizontalOptions = LayoutOptions.CenterAndExpand;
-            view.VerticalOptions = LayoutOptions.CenterAndExpand;
-            stack.Children.Add(view);
-
-            absoluteLayout.Children.Add(stack);
-
-            page.Content = absoluteLayout;
-
-        }
-
-        public static void CloseView(ContentPage page)
-        {
-            page.Content = (page.Content as AbsoluteLayout).Children[0];
         }
     }
 }

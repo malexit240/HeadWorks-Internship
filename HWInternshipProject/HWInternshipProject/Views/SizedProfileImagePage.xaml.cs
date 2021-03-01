@@ -4,9 +4,9 @@ using Xamarin.Forms.Xaml;
 namespace HWInternshipProject.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class MainListView : ContentPage
+    public partial class SizedProfileImagePage : ContentPage
     {
-        public MainListView()
+        public SizedProfileImagePage()
         {
             InitializeComponent();
         }

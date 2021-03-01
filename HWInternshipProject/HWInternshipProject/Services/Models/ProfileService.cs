@@ -3,27 +3,32 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq;
 
 using HWInternshipProject.Models;
+using System.Threading.Tasks;
+
 namespace HWInternshipProject.Services.Models
 {
     public class ProfileService : IProfileService
     {
-        ProfileManager _profileManager;
-        public ProfileService(ProfileManager profileManager)
+        IProfileManager _profileManager;
+        public ProfileService(IProfileManager profileManager)
         {
             _profileManager = profileManager;
         }
 
-        public List<Profile> GetProfilesForUser(User user)
+        public async Task<List<Profile>> GetProfilesForUser(User user)
         {
-            using (var context = new Context())
+            return await Task.Run(() =>
             {
-                return (from usr in context.users.Include(u => u.Profiles) where usr.UserId == user.UserId select usr).First().Profiles;
-            }
+                using (var context = new Context())
+                {
+                    return (from usr in context.users.Include(u => u.Profiles) where usr.UserId == user.UserId select usr).First().Profiles;
+                }
+            });
+
         }
 
         public void AddProfile(Profile profile)
         {
-
             _profileManager.Create(profile);
         }
 

@@ -86,8 +86,7 @@ namespace HWInternshipProject.ViewModels
 
                 if (NickName == "" || Name == "")
                 {
-                    UserDialogs.Instance.Alert(TextResources.Error, TextResources.FiledsNandNNmustbefilled, TextResources.Ok);
-
+                    UserDialogs.Instance.Alert(TextResources.FiledsNandNNmustbefilled, TextResources.Error, TextResources.Ok);
                     return;
                 }
 
