@@ -17,6 +17,7 @@ using HWInternshipProject.ViewModels;
 using HWInternshipProject.Services.Models;
 using HWInternshipProject.Services.Settings;
 using HWInternshipProject.Services.Validators;
+using HWInternshipProject.Dependency;
 using Xamarin.Forms.Xaml;
 
 namespace HWInternshipProject
@@ -43,15 +44,9 @@ namespace HWInternshipProject
             var login = this.Properties["login"];
             var password = this.Properties["password"];
 
-            //System.Globalization.CultureInfo.CurrentUICulture = new SettingsManager().CurrentCultureInfo;
-
             new SettingsManager().CurrentCultureInfo = new SettingsManager().CurrentCultureInfo;
+            new SettingsManager().Theme = new SettingsManager().Theme;
 
-            App.Current.Resources.MergedDictionaries.Clear();
-            if (new SettingsManager().Theme == Theme.Light)
-                App.Current.Resources.MergedDictionaries.Add(new LightTheme());
-            else
-                App.Current.Resources.MergedDictionaries.Add(new DarkTheme());
             await NavigationService.NavigateAsync("NavigationPage/SignInView", ("Login", login), ("Password", password));
         }
 

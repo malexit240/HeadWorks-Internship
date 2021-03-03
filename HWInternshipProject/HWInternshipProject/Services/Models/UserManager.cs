@@ -23,12 +23,12 @@ namespace HWInternshipProject.Services.Models
 
         public async Task<User> Create(string login, string password)
         {
-            return await Task.Run(() =>
+            return await Task.Run(async () =>
             {
                 using (var context = new Context())
                 {
 
-                    if (IsLoginUnique(login).Result)
+                    if (!await IsLoginUnique(login))
                         return null;
 
                     var user = new User()

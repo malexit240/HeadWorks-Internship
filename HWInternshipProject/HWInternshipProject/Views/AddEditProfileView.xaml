@@ -9,7 +9,7 @@
              Style="{DynamicResource pageStyle}">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem IconImageSource="ic_settings3x.png" Command="{Binding AddSaveCommand}" />
+        <ToolbarItem IconImageSource="ic_save3x.png" Command="{Binding AddSaveCommand}" />
     </ContentPage.ToolbarItems>
     <Grid RowDefinitions="1*, 2*">
         <Image Source="{Binding ImageDestination}" 
@@ -20,7 +20,6 @@
             </Image.GestureRecognizers>
         </Image>
         <StackLayout Grid.Row="1">
-            
             <Entry Placeholder="{x:Static resources:TextResources.NickName}" 
                Text="{Binding NickName}"
                    Style="{DynamicResource entryStyle}"/>

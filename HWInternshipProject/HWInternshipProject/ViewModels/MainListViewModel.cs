@@ -66,11 +66,14 @@ namespace HWInternshipProject.ViewModels
             });
         }
 
+        public DelegateCommand<ProfileViewModel> OpenProfileImageCommand { get; set; }
 
         public MainListViewModel(INavigationService navigationService, ISettingsManager settingsManager, IUserService userService) :
             base(navigationService)
         {
             SettingsManager = settingsManager;
+
+            OpenProfileImageCommand = new DelegateCommand<ProfileViewModel>(item => item.OpenProfileImageCommand.Execute());
 
             Profile.Actualize += async (sender, args) =>
             {
@@ -80,6 +83,7 @@ namespace HWInternshipProject.ViewModels
                     ReloadProfiles();
                 });
             };
+
 
             AddProfileCommand = new DelegateCommand(() =>
             {

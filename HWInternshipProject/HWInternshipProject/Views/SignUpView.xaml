@@ -5,9 +5,12 @@
              xmlns:resources="clr-namespace:HWInternshipProject.Resources"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="HWInternshipProject.Views.SignUpView"
+             Title="{x:Static resources:TextResources.Title_UserSignUp}"
              Style="{DynamicResource pageStyle}">
 
     <StackLayout Margin="20, 5">
+        <ActivityIndicator IsRunning="{Binding HasLongActivity}" 
+                           Style="{DynamicResource activityIndicatorStyle}"/>
         <StackLayout VerticalOptions="CenterAndExpand">
             <Entry Placeholder="{x:Static resources:TextResources.Login}"
                Text="{Binding Login}"

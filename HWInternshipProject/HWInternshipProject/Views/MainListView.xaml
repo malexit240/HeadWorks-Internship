@@ -5,6 +5,7 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="HWInternshipProject.Views.MainListView"
              xmlns:resources="clr-namespace:HWInternshipProject.Resources"
+             xmlns:converters="clr-namespace:HWInternshipProject.EventArgsConverters"
              Title="{x:Static resources:TextResources.Title_MainList}"
              Style="{DynamicResource pageStyle}">
 
@@ -15,12 +16,19 @@
                      Command="{Binding GoToSettingsViewCommand}"/>
     </ContentPage.ToolbarItems>
 
+    <ContentPage.Resources>
+        <converters:ItemTappedEventArgsConverter x:Key="itemTappedEventArgsConverter" />
+    </ContentPage.Resources>
+
     <Grid RowDefinitions="*">
         <ListView ItemsSource="{Binding Profiles}"
                   SelectionMode="None"
                   HasUnevenRows="True"
                   IsVisible="{Binding IsListVisible}"
                   Grid.Row="0">
+            <ListView.Behaviors>
+                <prism:EventToCommandBehavior EventName="ItemTapped" Command="{Binding OpenProfileImageCommand}" EventArgsConverter="{StaticResource itemTappedEventArgsConverter}" />
+            </ListView.Behaviors>
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
@@ -31,9 +39,6 @@
                                               Text="{x:Static resources:TextResources.Edit}"/>
                         </ViewCell.ContextActions>
                         <Grid ColumnDefinitions="1*,2*" HeightRequest="120">
-                            <Grid.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding OpenProfileImageCommand}"/>
-                            </Grid.GestureRecognizers>
                             <Image Grid.Column="0" 
                                    Source="{Binding ImageDestination}">
                             </Image>

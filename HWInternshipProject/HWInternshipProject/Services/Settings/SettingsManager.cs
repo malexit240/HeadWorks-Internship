@@ -3,6 +3,7 @@ using System.Globalization;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using HWInternshipProject.Models;
+using HWInternshipProject.Dependency;
 
 namespace HWInternshipProject.Services.Settings
 {
@@ -15,11 +16,14 @@ namespace HWInternshipProject.Services.Settings
             set
             {
                 Preferences.Set(nameof(Theme), (int)value);
+
                 App.Current.Resources.MergedDictionaries.Clear();
                 if (value == Theme.Light)
                     App.Current.Resources.MergedDictionaries.Add(new LightTheme());
                 else
                     App.Current.Resources.MergedDictionaries.Add(new DarkTheme());
+
+                DependencyService.Get<IChangerStatusBarColor>().SetStatusBarColor((Color)App.Current.Resources["PrimaryColor"]);
             }
         }
         public ProfilesListOrderBy ProfilesListOrderBy

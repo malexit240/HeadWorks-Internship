@@ -107,12 +107,12 @@ namespace HWInternshipProject.ViewModels
                         new ActionSheetOption(TextResources.PickAtGallery, async ()=>{
                             var result = await FilePicker.PickAsync();
                             ImageDestination = result?.FullPath ?? ImageDestination;
-                        }),
+                        },"ic_collections_3x.png"),
 
                         new ActionSheetOption(TextResources.TakeAPhotoWithCamera, async ()=>{
                             var result = await MediaPicker.CapturePhotoAsync();
                             ImageDestination = result?.FullPath ?? ImageDestination;
-                        })
+                        },"ic_camera_alt3x.png")
                     },
                     Cancel = new ActionSheetOption(TextResources.Cancel)
                 });
